@@ -1,0 +1,17 @@
+flowchart LR
+  subgraph VPC["VPC (subredes privadas para datos)"]
+    EC2["EC2 t3.large<br/>Airflow + dbt (Docker)"]
+    MYSQL[("RDS MySQL 8.0<br/>transaccional")]
+    DOC[("DocumentDB Serverless<br/>reseñas / navegación")]
+    RS[("Redshift Serverless<br/>raw · intermediate · quarantine · marts")]
+  end
+  S3[("S3 privado<br/>batch_id + manifest")]
+  SM["Secrets Manager"]
+  QS["QuickSight (SPICE)<br/>Dashboard Ventas DW"]
+  EC2 -- "1 extrae (inicial/incremental)" --> MYSQL
+  EC2 -- "1 extrae" --> DOC
+  EC2 -- "2 escribe lotes" --> S3
+  S3 -- "3 COPY con rol IAM" --> RS
+  EC2 -- "4 dbt run/snapshot/test" --> RS
+  RS -- "5 VPC connection (5439)" --> QS
+  SM -. "contraseñas en runtime" .-> EC2

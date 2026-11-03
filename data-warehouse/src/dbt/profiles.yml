@@ -1,0 +1,23 @@
+ecommerce_dw:
+  # Destino por defecto: DuckDB local. En AWS se usa --target redshift (o DBT_TARGET=redshift).
+  target: "{{ env_var('DBT_TARGET', 'local') }}"
+  outputs:
+    local:
+      type: duckdb
+      path: /opt/warehouse/warehouse.duckdb
+      schema: intermediate
+      threads: 1
+
+    redshift:
+      type: redshift
+      host: "{{ env_var('REDSHIFT_HOST') }}"
+      port: 5439
+      dbname: "{{ env_var('REDSHIFT_DATABASE', 'dw') }}"
+      schema: intermediate
+      # Usuario y contraseña NO están en el archivo: el ejecutor los lee de Secrets Manager y los inyecta
+      # como variables de entorno del proceso (solo en memoria).
+      user: "{{ env_var('REDSHIFT_USER') }}"
+      password: "{{ env_var('REDSHIFT_PASSWORD') }}"
+      threads: 4
+      connect_timeout: 300
+      sslmode: require

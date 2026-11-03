@@ -1,0 +1,13 @@
+.env.aws
+.venv/
+__pycache__/
+.pytest_cache/
+*.tfstate*
+.terraform/
+
+# Airflow en la EC2
+docker/.env.airflow
+src/dbt/target/
+src/dbt/logs/
+src/dbt/dbt_packages/
+terraform.tfvars
