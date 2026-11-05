@@ -1,0 +1,50 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3Bucket",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+      "Resource": "arn:aws:s3:::CAMBIAR-datalake-noticias"
+    },
+    {
+      "Sid": "S3Objects",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+      "Resource": "arn:aws:s3:::CAMBIAR-datalake-noticias/*"
+    },
+    {
+      "Sid": "Comprehend",
+      "Effect": "Allow",
+      "Action": [
+        "comprehend:DetectEntities",
+        "comprehend:DetectKeyPhrases",
+        "comprehend:DetectDominantLanguage",
+        "comprehend:BatchDetectEntities",
+        "comprehend:BatchDetectKeyPhrases"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "GlueCatalog",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase", "glue:GetDatabases", "glue:CreateDatabase",
+        "glue:GetTable", "glue:GetTables", "glue:CreateTable", "glue:UpdateTable", "glue:DeleteTable",
+        "glue:GetPartition", "glue:GetPartitions", "glue:BatchGetPartition",
+        "glue:CreatePartition", "glue:BatchCreatePartition", "glue:UpdatePartition",
+        "glue:DeletePartition", "glue:BatchDeletePartition"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Athena",
+      "Effect": "Allow",
+      "Action": [
+        "athena:StartQueryExecution", "athena:GetQueryExecution",
+        "athena:GetQueryResults", "athena:StopQueryExecution", "athena:GetWorkGroup"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

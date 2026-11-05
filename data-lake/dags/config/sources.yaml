@@ -1,0 +1,13 @@
+sources:
+  - id: eltiempo_politica
+    medio: El Tiempo
+    seccion: politica
+    url: https://www.eltiempo.com/rss/politica.xml
+  - id: eltiempo_economia
+    medio: El Tiempo
+    seccion: economia
+    url: https://www.eltiempo.com/rss/economia.xml
+  - id: eltiempo_justicia
+    medio: El Tiempo
+    seccion: justicia
+    url: https://www.eltiempo.com/rss/justicia.xml
