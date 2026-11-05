@@ -1,0 +1,14 @@
+bucket: CAMBIAR-datalake-noticias
+region: us-east-1
+glue_database: noticias_dl
+athena_workgroup: primary
+athena_output_prefix: athena-results/
+
+http:
+  timeout_seconds: 20
+  user_agent: datalake-noticias-eia/1.0
+
+comprehend:
+  language: es
+  max_text_bytes: 4500
+  min_text_chars: 20
